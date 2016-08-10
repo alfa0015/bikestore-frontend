@@ -1,0 +1,6 @@
+.row
+	.container{}
+		%form{:"ng-submit"=>"auth()", method:"post"}
+			%input{:type => "email",:"ng-model"=>"loginForm.email",:placeholder=>"Email"}/
+			%input{:type => "password",:"ng-model"=>"loginForm.password",:placeholder=>"Password"}/
+			%button.btn{:type=>"submit"} Enviar

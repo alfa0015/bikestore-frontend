@@ -1,0 +1,62 @@
+.row
+	.col.s12
+		%ul.tabs
+			%li.tab.col.s3
+				%a.active.black-text{:href => "#test1"} Pinarello
+			%li.tab.col.s3
+				%a.black-text{:href => "#test2"} Bianchi
+			%li.tab.col.s3
+				%a.black-text{:href => "#test3"} Quinatana Roo
+			.indicator.black{:style=>"z-index:1"}
+		#test1.col.s12
+			.row
+				.col.s12.m6.l4{"ng-repeat"=>"catalogo in catalogos | filter:{ marca:'Pinarello' }| filter:{ tipo:'triatlon'}"}
+					.card.grande
+						.card-image.waves-effect.waves-block.waves-light
+							%picture
+								%source{:media=>"(max-width: 568px)","ng-srcset"=>"{{catalogo.imagen_phone_url}}"}/
+								%source{:media=>"(max-width: 1280px)","ng-srcset"=>"{{catalogo.imagen_tablet_url}}"}/
+								%img.activator.standar-height{"ng-src"=>"{{catalogo.imagen_url}}"}/
+						.card-content
+							%span.card-title.activator.grey-text.text-darken-4.truncate
+								{{catalogo.modelo}}
+								%i.material-icons.right more_vert
+								%p
+									%a{:href => "#/ruta/{{catalogo.id}}"}
+										Mas Informacion
+	#test2.col.s12
+		.row
+			.col.s12.m6.l4{"ng-repeat"=>"catalogo in catalogos | filter:{ marca:'Bianchi' }| filter:{ tipo:'triatlon'}"}
+				.card.grande
+					.card-image.waves-effect.waves-block.waves-light
+						%picture
+							%source{:media=>"(max-width: 568px)","ng-srcset"=>"{{catalogo.imagen_phone_url}}"}/
+							%source{:media=>"(max-width: 1280px)","ng-srcset"=>"{{catalogo.imagen_tablet_url}}"}/
+							%img.activator.standar-height{"ng-src"=>"{{catalogo.imagen_url}}"}/
+					.card-content
+						%span.card-title.activator.grey-text.text-darken-4.truncate
+							{{catalogo.modelo}}
+							%i.material-icons.right more_vert
+							%p
+								%a{:href => "#/ruta/{{catalogo.id}}"}
+									Mas Informacion
+	#test3.col.s12
+		.row
+			.col.s12.m6.l4{"ng-repeat"=>"catalogo in catalogos | filter:{ marca:'QuintanaRoo' }| filter:{ tipo:'triatlon'}"}
+				.card.grande
+					.card-image.waves-effect.waves-block.waves-light
+						%picture
+							%source{:media=>"(max-width: 568px)","ng-srcset"=>"{{catalogo.imagen_phone_url}}"}/
+							%source{:media=>"(max-width: 1280px)","ng-srcset"=>"{{catalogo.imagen_tablet_url}}"}/
+							%img.activator.standar-height{"ng-src"=>"{{catalogo.imagen_url}}"}/
+					.card-content
+						%span.card-title.activator.grey-text.text-darken-4.truncate
+							{{catalogo.modelo}}
+							%i.material-icons.right more_vert
+							%p
+								%a{:href => "#/ruta/{{catalogo.id}}"}
+									Mas Informacion
+:javascript
+	$(document).ready(function(){
+		$('ul.tabs').tabs();
+	});

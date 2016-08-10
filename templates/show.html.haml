@@ -1,0 +1,32 @@
+.row#panel{:"ng-if"=>"authorized==true"}
+	%a.btn#edit_catalogo{:href => "",:"ng-click"=>"change()"} Editar
+.row
+	.container
+		.card
+			.card-image.waves-effect.waves-block.waves-light
+				%picture
+					%source{:media=>"(max-width: 568px)","ng-srcset"=>"{{catalogo.imagen_phone_url}}"}/
+					%source{:media=>"(max-width: 1280px)","ng-srcset"=>"{{catalogo.imagen_tablet_url}}"}/
+					%img.activator{"ng-src"=>"{{catalogo.imagen_url}}"}/
+			.card-content
+				%span.card-title.activator.grey-text.text-darken-4
+					{{catalogo.modelo}}
+		%table.bordered.responsive-table
+			%thead
+				%tr
+					%th Data
+					%th Description
+			%tbody
+				%tr
+					%td Modelo
+					%td#modelo {{catalogo.modelo}}
+				%tr
+					%td Color
+					%td#color {{catalogo.color}}
+				%tr
+					%td Material
+					%td#material {{catalogo.material}}
+				%tr
+					%td Tamaños
+					%td#size {{catalogo.sizes}}
+		#file

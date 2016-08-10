@@ -1,0 +1,77 @@
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://coffeescript.org/
+angular.module("site",["ngRoute","templates","ngResource","angularUtils.directives.dirPagination",'LocalStorageModule','ngFileUpload'])
+.config(($routeProvider)->
+		$routeProvider
+			.when("/",{
+					controller:"LandingCtrl"
+					templateUrl:"landing.html"
+				})
+			.when("/ruta",{
+					controller:"CatalogoCtrl"
+					templateUrl:"ruta.html"
+				})
+			.when("/ruta/:id",{
+					controller:"CatalogoShowCtrl"
+					templateUrl:"show.html"
+				})
+			.when("/mtb",{
+				 controller:"CatalogoCtrl"
+				 templateUrl:"mtb.html"
+				})
+			.when("/mtb/:id",{
+					controller:"CatalogoShowCtrl"
+					templateUrl:"show.html"
+				})
+			.when("/tri",{
+					controller:"CatalogoCtrl"
+					templateUrl:"tri.html"
+				})
+			.when("/tri/:id",{
+				 controller:"CatalogoShowCtrl"
+				 templateUrl:"show.html"
+				})
+			.when("/partners",{
+				controller:"PartnersController",
+				templateUrl:"partners.html"
+			})
+			.when("/pinarello",{
+				controller:"CatalogoCtrl",
+				templateUrl:"pinarello.html"
+			})
+			.when("/bianchi",{
+				controller:"CatalogoCtrl",
+				templateUrl:"bianchi.html"
+			})
+			.when("/quintana",{
+				controller:"CatalogoCtrl",
+				templateUrl:"quintana.html"
+			})
+			.when("/aida",{
+				controller:"BikeCtrl",
+				templateUrl:"aida.html"
+			})
+			.when("/claudia",{
+				controller:"BikeCtrl",
+				templateUrl:"claudia.html"
+			})
+			.when("/dogma",{
+				controller:"DogmaCtrl",
+				templateUrl:"dogma.html"
+			})
+			.when("/login",{
+				controller:"LoginCtrl",
+				templateUrl:"login.html"
+			})
+			.when("/cpanel",{
+				controller:"CpanelCtrl",
+				templateUrl:"cpanel.html"
+			})
+)
+.directive('slideit', ->
+	  { link: (scope, element, attrs) ->
+	    $(element).nivoSlider()
+	    return
+	 }
+)

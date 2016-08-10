@@ -1,0 +1,79 @@
+.row.grey.darken-4
+  /--Slider--
+  .col.s12.m8.l8.no-padding
+    .slider-wrapper.theme-default
+      #slider.nivoSlider{:slideit => ""}
+        =image_tag('slider/pinarello.jpg')
+        =image_tag('slider/bianchi.jpg')
+        =image_tag('slider/quintanaroo.jpg')
+        =image_tag('slider/bikestore_local.jpg')
+  /slider
+  /--noticias
+  .col.s12.m4.l4
+    .card{"dir-paginate"=>"new in news | itemsPerPage:2"}
+      .card-image.waves-effect.waves-block.waves-light
+        %picture
+          %source{:media=>"(max-width: 568px)","ng-srcset"=>"{{new.cover_phone_url}}"}/
+          %source{:media=>"(max-width: 1280px)","ng-srcset"=>"{{new.cover_table_url}}"}/
+          %img.activator.standar-height{"ng-src"=>"{{new.cover_url}}"}/
+        %span.card-title
+          %a.white-text{"ng-href" => "{{new.path}}"}
+            %b
+              {{new.title}}
+    %center
+      %dir-pagination-controls{"boundary-links"=>"true","on-page-change"=>"pageChangeHandler(newPageNumber)"}
+  /noticias
+
+/--Catalogo
+.row
+  .col.s12.m4.l4
+    .card.grande
+      .card-image.waves-effect.waves-block.waves-light
+        %picture
+          %source{:media=>"(max-width: 568px)",:srcset=>"#{asset_path('pinarello/phone/ruta.jpg')}"}/
+          %source{:media=>"(max-width: 1280px)",:srcset=>"#{asset_path('pinarello/table/ruta.jpg')}"}/
+          =image_tag("pinarello/desktop/ruta.jpg",:class=>"activator")
+      .card-content
+        %span.card-title.activator.grey-text.text-darken-4
+          Pinarello
+          %i.material-icons.right more_vert
+          %p
+            %a{:href => "#/pinarello"}
+              Mas Informacion
+  .col.s12.m4.l4
+    .card.grande
+      .card-image.waves-effect.waves-block.waves-light
+        %picture
+          %source{:media=>"(max-width: 568px)",:srcset=>"#{asset_path('bianchi/phone/mtb.jpg')}"}/
+          %source{:media=>"(max-width: 1280px)",:srcset=>"#{asset_path('bianchi/table/mtb.jpg')}"}/
+          =image_tag("bianchi/desktop/mtb.jpg",:class=>"activator")
+      .card-content
+        %span.card-title.activator.grey-text.text-darken-4
+          Bianchi
+          %i.material-icons.right more_vert
+          %p
+            %a{:href => "#/bianchi"}
+              Mas Informacion
+  .col.s12.m4.l4
+    .card.grande
+      .card-image.waves-effect.waves-block.waves-light
+        %picture
+          %source{:media=>"(max-width: 568px)",:srcset=>"#{asset_path('quintana/phone/tri.png')}"}/
+          %source{:media=>"(max-width: 1280px)",:srcset=>"#{asset_path('quintana/table/tri.png')}"}/
+          =image_tag("quintana/desktop/tri.png",:class=>"activator")
+      .card-content
+        %span.card-title.activator.grey-text.text-darken-4
+          Quinatana Roo
+          %i.material-icons.right more_vert
+          %p
+            %a{:href => "#/quintana"}
+              Mas Informacion
+/Catalogo
+.col.s12.m8.l8.no-padding
+  .slider-wrapper.theme-default
+    #slider.nivoSlider{:slideit => ""}   
+      %img{:"data-ng-repeat"=>"galeria in galerias",:"data-ng-src" =>"{{galeria.image_desktop_url}}"}/
+/--Mapa
+.row
+  .col.s12.m12.l12{:style=>"height:23em;"}
+    %iframe{:src => "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7753.562544345052!2d-89.24829515309183!3d13.671059974744965!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0x89a6d1598c3fe40b!2sGames+Place!5e0!3m2!1ses!2ssv!4v1465932601516", :frameborder => "0",:style=>"height:100%;width:100%;border:0;"}

@@ -1,0 +1,168 @@
+.row
+	.col.s4
+		%table.bordered.striped.highlight
+			%thead
+				%tr
+					%th Marca
+					%th Modelo
+					%th Tipo
+					%th Acción
+			%tbody
+				%tr{:"dir-paginate"=>"catalogo in catalogos | itemsPerPage: 10",:"pagination-id"=>"catalo"}
+					%td {{catalogo.marca}}
+					%td {{catalogo.modelo}}
+					%td {{catalogo.tipo}}
+					%td
+						%a.modal-trigger{:href=>"","data-target" => "catalogo",:"ng-click"=>"get_catalogo(catalogo)"}
+							%i.material-icons mode_edit
+						%a{:href => "",:"ng-click" => "removeCatalogo(catalogo.id)"}
+							%i.material-icons delete
+		%center
+			%dir-pagination-controls{:"boundary-links"=>true,:"on-page-change"=>"pageChangeHandler(newPageNumber)",:"pagination-id"=>"catalo"}
+	.col.s4
+		%table.bordered.striped.highlight
+			%thead
+				%tr
+					%th Titulo
+					%th URL
+					%th Accion
+			%tbody
+				%tr{"dir-paginate"=>"new in news | itemsPerPage: 2", "pagination-id"=>"noticias"}
+					%td {{new.title}}
+					%td {{new.path}}
+					%td
+						%a.modal-trigger{:href=>"","data-target" => "noticias",:"ng-click"=>"get_noticia(new)"}
+							%i.material-icons mode_edit
+						%a{:href => "",:"ng-click" => "removeNew(new.id)"}
+							%i.material-icons delete
+		%dir-pagination-controls{"pagination-id"=>"noticias",:"boundary-links"=>true,:"on-page-change"=>"pageChangeHandler(newPageNumber)"}
+	.col.s4
+		%table.bordered.striped.highlight
+			%thead
+				%tr
+					%th Nombre
+					%th URL
+			%tbody
+				%tr{"dir-paginate"=>"menu in menus | itemsPerPage: 5", "pagination-id"=>"nav"}
+					%td {{menu.name}}
+					%td {{menu.path}}
+					%td
+						%a.modal-trigger{:href=>"","data-target" => "nav",:"ng-click"=>"get_menu(menu)"}
+							%i.material-icons mode_edit
+						%a{:href => "",:"ng-click" => "removeNav(menu.id)"}
+							%i.material-icons delete
+		%dir-pagination-controls{"pagination-id"=>"nav",:"boundary-links"=>true,:"on-page-change"=>"pageChangeHandler(newPageNumber)"}
+.row
+	.col.s4
+		%form.col.s12{:name => "myForm"}
+			.row
+				.input-field.col.s12
+					%label{:for => "marca"} Marca
+					%input.validate#marca{:type => "text",:"ng-model"=>"catalogo.marca"}/
+				.input-field.col.s12
+					%label{:for => "modelo"} Modelo
+					%input.validate#modelo{:type => "text",:"ng-model"=>"catalogo.modelo"}/
+				.input-field.col.s12
+					%select{:"ng-model"=>"catalogo.tipo"}
+						%option{:value=>"", :disabled=>true, :selected=>true}Tipo de Bicicleta
+						%option{:value => "ruta"} Ruta
+						%option{:value => "mtb"} MTB
+						%option{:value => "triatlon"} Triatlon
+					%label{:for => ""}Tipo de Bicicleta
+				.input-field.file-field.col.s12
+					.btn
+						%span File
+						%input{:accept => "image/*", :name => "file", "ng-model" => "picFile", "ngf-max-size" => "2MB", "ngf-model-invalid" => "errorFile", "ngf-select" => "", :required => "", :type => "file"}/
+					.file-path-wrapper
+						%input.file-path.validate{:type => "text"}/
+				.input-field.col.s12
+					%button.btn{"ng-click" => "catalogo(picFile)", "ng-disabled" => "!myForm.$valid"} Enviar
+					%span.err{"ng-show" => "errorMsg"}
+	.col.s4
+		%form.col.s12{:name => "myForm"}
+			.row
+				.input-field.col.s12
+					%label{:for => "titulo"} Titulo
+					%input.validate#titulo{:type => "text",:"ng-model"=>"new.title"}/
+				.input-field.col.s12
+					%label{:for => "url"} URL
+					%input.validate#url{:type => "text",:"ng-model"=>"new.path"}/
+				.input-field.file-field.col.s12
+					.btn
+						%span File
+						%input{:accept => "image/*", :name => "file", "ng-model" => "picFile", "ngf-max-size" => "2MB", "ngf-model-invalid" => "errorFile", "ngf-select" => "", :required => "", :type => "file"}/
+					.file-path-wrapper
+						%input.file-path.validate{:type => "text"}/
+				.input-field.col.s12
+					%button.btn{"ng-click" => "noticia(picFile)", "ng-disabled" => "!myForm.$valid"} Enviar
+					%span.err{"ng-show" => "errorMsg"}
+	.col.s4
+		%form.col.s12{:name => "myForm"}
+			.row
+				.input-field.col.s12
+					%label{:for => "marca"} Nombre
+					%input.validate#marca{:type => "text",:"ng-model"=>"menu.name"}/
+				.input-field.col.s12
+					%label{:for => "modelo"} URL
+					%input.validate#modelo{:type => "text",:"ng-model"=>"menu.path"}/
+				.input-field.col.s12
+					%button.btn{"ng-click" => "navs()", "ng-disabled" => "!myForm.$valid"} Enviar
+					%span.err{"ng-show" => "errorMsg"}
+#catalogo.modal
+	.modal-content
+		.row
+			.col.s12
+				.row
+					.input-field.col.s12
+						%label{:for => "marca"}Marca
+						%input.validate#marca{:type => "text",:placeholder=>"Marca",:"ng-model"=>"bici.marca"}/
+					.input-field.col.s12
+						%label{:for => "modelo"}Modelo
+						%input.validate#modelo{:type => "text",:placeholder=>"Modelo",:"ng-model"=>"bici.modelo"}/
+					.input-field.col.s12
+						%select{:"ng-model"=>"bici.tipo"}
+							%option{:value=>"", :disabled=>true, :selected=>true}Tipo de Bicicleta
+							%option{:value => "ruta"} Ruta
+							%option{:value => "mtb"} MTB
+							%option{:value => "triatlon"} Triatlon
+						%label{:for => ""}Tipo de Bicicleta
+					.input-field.file-field.col.s12
+						.btn
+							%span File
+							%input{:accept => "image/*", :name => "file", "ng-model" => "image", "ngf-max-size" => "2MB", "ngf-model-invalid" => "errorFile", "ngf-select" => "", :required => "", :type => "file"}/
+						.file-path-wrapper
+							%input.file-path.validate{:type => "text"}/
+	.modal-footer
+		%a.modal-action.modal-close.waves-effect.waves-green.btn-flat{:"ng-click"=>"catalogo_edit(image)", :"ng-disabled" => "!myForm.$valid"} Guardar
+#noticias.modal
+	.modal-content
+		.row
+			.col.s12
+				.row
+					.input-field.col.s12
+						%label{:for => "titulo"}Titulo
+						%input.validate#titulo{:type => "text",:placeholder=>"Titulo",:"ng-model"=>"noticia.title"}/
+					.input-field.col.s12
+						%label{:for => "url"}URL
+						%input.validate#modelo{:type => "text",:placeholder=>"URL",:"ng-model"=>"noticia.path"}/
+					.input-field.file-field.col.s12
+						.btn
+							%span File
+							%input{:accept => "image/*", :name => "file", "ng-model" => "image", "ngf-max-size" => "2MB", "ngf-model-invalid" => "errorFile", "ngf-select" => "", :required => "", :type => "file"}/
+						.file-path-wrapper
+							%input.file-path.validate{:type => "text"}/
+	.modal-footer
+		%a.modal-action.modal-close.waves-effect.waves-green.btn-flat{:"ng-click"=>"noticia_edit(image)", :"ng-disabled" => "!myForm.$valid"} Guardar
+#nav.modal
+	.modal-content
+		.row
+			.col.s12
+				.row
+					.input-field.col.s12
+						%label{:for => "name"}Nombre
+						%input.validate#name{:type => "text",:placeholder=>"Name",:"ng-model"=>"nav.name"}/
+					.input-field.col.s12
+						%label{:for => "url"}URL
+						%input.validate#url{:type => "text",:placeholder=>"URL",:"ng-model"=>"nav.path"}/
+	.modal-footer
+		%a.modal-action.modal-close.waves-effect.waves-green.btn-flat{:"ng-click"=>"menu_edit(image)", :"ng-disabled" => "!myForm.$valid"} Guardar

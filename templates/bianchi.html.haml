@@ -1,0 +1,15 @@
+.row
+  .col.s12.m6.l4{"ng-repeat"=>"catalogo in catalogos | filter:{ marca:'Bianchi' }"}
+    .card.grande
+      .card-image.waves-effect.waves-block.waves-light
+        %picture
+          %source{:media=>"(max-width: 568px)","ng-srcset"=>"{{catalogo.imagen_phone_url}}"}/
+          %source{:media=>"(max-width: 1280px)","ng-srcset"=>"{{catalogo.imagen_tablet_url}}"}/
+          %img.activator.standar-height{"ng-src"=>"{{catalogo.imagen_url}}"}/
+      .card-content
+        %span.card-title.activator.grey-text.text-darken-4.truncate
+          {{catalogo.modelo}}
+          %i.material-icons.right more_vert
+          %p
+            %a{:href => "#/ruta/{{catalogo.id}}"}
+              Mas Informacion
